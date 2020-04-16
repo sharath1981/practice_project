@@ -9,31 +9,33 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PersonFileReader {
 
-	public List<Person> readPersonFile1(final String filePath) {
+	public List<Person> readPersonFile1(final String filePath, final Predicate<Person> filter, final Comparator<Person> comparing) {
 		try (final Stream<String> lines = Files.lines(Paths.get(filePath))) {
-			return getPersons(lines);
+			return getPersons(lines, filter, comparing);
 		} catch (IOException e) {
 		}
 		return Collections.EMPTY_LIST;
 	}
 	
-	public List<Person> readPersonFile2(final String filePath) {
+	public List<Person> readPersonFile2(final String filePath, final Predicate<Person> filter, final Comparator<Person> comparing) {
 		try (final BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)));
 				final Stream<String> lines = reader.lines()) {
-			return getPersons(lines);
+			return getPersons(lines, filter, comparing);
 		} catch (IOException e) {
 		}
 		return Collections.EMPTY_LIST;
 	}
 	
-	private List<Person> getPersons(final Stream<String> lines) {
+	private List<Person> getPersons(final Stream<String> lines, final Predicate<Person> filter, final Comparator<Person> comparing) {
 		return lines.map(this::populatePerson)
-				    .sorted(Comparator.comparing(Person::getAge))
+				    .filter(filter)
+				    .sorted(comparing)
 				    .collect(Collectors.toList());
 	}
 	
