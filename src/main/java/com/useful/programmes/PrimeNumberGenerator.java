@@ -12,7 +12,7 @@ public class PrimeNumberGenerator {
 	
 	public boolean isPrime(int number) {
 		return number>1 && IntStream.range(2, (int)Math.sqrt(number))
-				                     .noneMatch(i->number%i==0);
+				                    .noneMatch(i->number%i==0);
 	}
 	
 	public int nextPrimeNumber(int number) {

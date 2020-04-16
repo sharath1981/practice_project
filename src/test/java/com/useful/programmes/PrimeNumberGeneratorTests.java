@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 class PrimeNumberGeneratorTests {
 
 	private PrimeNumberGenerator generator;
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		generator = new PrimeNumberGenerator();
@@ -20,7 +21,7 @@ class PrimeNumberGeneratorTests {
 
 	@Test
 	void testIsPrime() {
-		assertTrue(generator.isPrime(121));
+		assertTrue(generator.isPrime(2));
 		assertTrue(generator.isPrime(31));
 		assertFalse(generator.isPrime(1));
 	}
