@@ -14,4 +14,11 @@ public class PrimeNumberGenerator {
 		return number>1 && IntStream.range(2, (int)Math.sqrt(number))
 				                     .noneMatch(i->number%i==0);
 	}
+	
+	public int nextPrimeNumber(int number) {
+		return IntStream.iterate(number+1, n->n+1)
+		                .filter(this::isPrime)
+		                .findFirst()
+		                .getAsInt();
+	}
 }

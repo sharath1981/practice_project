@@ -1,8 +1,6 @@
 package com.useful.programmes;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,9 +20,14 @@ class PrimeNumberGeneratorTests {
 
 	@Test
 	void testIsPrime() {
-		assertTrue(generator.isPrime(11));
+		assertTrue(generator.isPrime(121));
 		assertTrue(generator.isPrime(31));
 		assertFalse(generator.isPrime(1));
+	}
+	
+	@Test
+	void TestNextPrimeNuber() {
+		assertEquals(121, generator.nextPrimeNumber(113));
 	}
 
 }
