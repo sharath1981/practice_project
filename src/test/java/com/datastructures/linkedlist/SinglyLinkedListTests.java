@@ -8,8 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.datastructures.linkedlist.SinglyLinkedList;
-
 class SinglyLinkedListTests {
 
 	private SinglyLinkedList<String> list;
@@ -111,6 +109,31 @@ class SinglyLinkedListTests {
 		assertEquals("Javascript", list.getLast());
 		assertEquals(3, list.size());
 		assertFalse(list.isEmpty());
+	}
+	
+	@Test
+	void testContains() {
+		list.addToFront("sharath");
+		list.addToFront("kumar");
+		list.addToFront("b");
+		list.addToBack("Java");
+		list.addToBack("Javascript");
+		list.addToBack("Spring");
+		assertTrue(list.contains("sharath"));
+		assertFalse(list.contains(null));
+	}
+	
+	@Test
+	void testIndexOf() {
+		list.addToFront("sharath");
+		list.addToFront("kumar");
+		list.addToFront("b");
+		list.addToBack("Java");
+		list.addToBack("Javascript");
+		list.addToBack("Spring");
+		assertEquals(-1, list.indexOf(null));
+		assertEquals(-1, list.indexOf("alex"));
+		assertEquals(4, list.indexOf("Javascript"));
 	}
 	
 	@Test

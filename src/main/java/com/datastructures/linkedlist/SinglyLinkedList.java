@@ -5,6 +5,19 @@ import java.util.stream.Stream;
 public class SinglyLinkedList<E> {
 	private Node<E> head;
 	private int size;
+	
+	public int size() {
+		return size;
+	}
+
+	public boolean isEmpty() {
+		return head == null;
+	}
+	
+	public void clear() {
+		head = null;
+		size = 0;
+	}
 
 	public void addToFront(final E element) {
 		head = new Node<>(element, head);
@@ -25,14 +38,6 @@ public class SinglyLinkedList<E> {
 		size++;
 	}
 
-	public int size() {
-		return size;
-	}
-
-	public boolean isEmpty() {
-		return head == null;
-	}
-
 	public E getFirst() {
 		if (isEmpty()) {
 			throw new IllegalStateException("Empty Linkedlist...");
@@ -51,12 +56,31 @@ public class SinglyLinkedList<E> {
 		}
 		return current.getElement();
 	}
-
-	public void clear() {
-		head = null;
-		size = 0;
+	
+	public boolean contains(final E element) {
+		if (isEmpty()) {
+			throw new IllegalStateException("Empty Linkedlist...");
+		}
+		return Stream.iterate(head, Node::getNext)
+					 .limit(size)
+					 .map(Node::getElement)
+					 .anyMatch(e->e.equals(element));
 	}
 	
+	public int indexOf(final E element) {
+		if (isEmpty()) {
+			throw new IllegalStateException("Empty Linkedlist...");
+		}
+		Node<E> current = head;
+		for(int i=0; i<size; i++ ) {
+			if(current.getElement().equals(element)) {
+				return i;
+			}
+			current = current.getNext();
+		}
+		return -1;
+	}
+
 	public E elementAt(final int index) {
 		return Stream.iterate(head, Node::getNext)
 				     .skip(index)
