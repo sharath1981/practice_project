@@ -1,6 +1,7 @@
 package com.datastructures.linkedlist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -122,6 +123,26 @@ class DoublyLinkedListTests {
 		list.addLast("kumar");
 		list.addFirst("akshay");
 		assertEquals("kumar", list.elementAt(2));
+	}
+	
+	@Test
+	void testContains() {
+		assertFalse(list.contains("A"));
+		list.addFirst("sharath");
+		list.addLast("A");
+		list.addFirst("akshay");
+		assertTrue(list.contains("A"));
+		assertFalse(list.contains("X"));
+	}
+	
+	@Test
+	void testIndexOf() {
+		assertEquals(-1, list.indexOf("A"));
+		list.addFirst("sharath");
+		list.addLast("A");
+		list.addFirst("akshay");
+		assertEquals(2, list.indexOf("A"));
+		assertEquals(-1, list.indexOf("X"));
 	}
 
 }

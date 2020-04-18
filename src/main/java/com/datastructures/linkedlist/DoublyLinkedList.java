@@ -110,11 +110,35 @@ public class DoublyLinkedList<E> {
 	}
 
 	public E elementAt(final int index) {
+		if(isEmpty()) {
+			throw new EmptyStackException();
+		}
 		return Stream.iterate(first, Node::getNext)
 				     .skip(index)
 				     .map(Node::getElement)
 				     .findFirst()
 				     .orElseThrow(IndexOutOfBoundsException::new);
+	}
+	
+	public int indexOf(final E element) {
+		if(isEmpty()) {
+			return -1;
+		}
+		Node<E> current = first;
+		for(int i=0; i<size; i++) {
+			if(current.getElement().equals(element)) {
+				return i;
+			}
+			current = current.getNext();
+		}
+		return -1;
+	}
+	
+	public boolean contains(final E element) {
+		return Stream.iterate(first, Node::getNext)
+     			     .limit(size)
+     			     .map(Node::getElement)
+                     .anyMatch(e->e.equals(element));
 	}
 
 	private static final class Node<E> {
@@ -122,16 +146,16 @@ public class DoublyLinkedList<E> {
 		private Node<E> prev;
 		private final E element;
 
-		public Node(final E element) {
+		private Node(final E element) {
 			this.element = element;
 		}
 
-		public Node(final Node<E> first, final E element) {
+		private Node(final Node<E> first, final E element) {
 			this(element);
 			next = first;
 		}
 		
-		public Node(final E element, final Node<E> last) {
+		private Node(final E element, final Node<E> last) {
 			this(element);
 			prev = last;
 		}
@@ -144,11 +168,11 @@ public class DoublyLinkedList<E> {
 			this.next = next;
 		}
 
-		public Node<E> getPrev() {
+		private Node<E> getPrev() {
 			return prev;
 		}
 
-		public void setPrev(Node<E> prev) {
+		private void setPrev(Node<E> prev) {
 			this.prev = prev;
 		}
 
