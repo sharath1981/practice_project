@@ -9,6 +9,7 @@ class BinarySearchTests {
 
 	private String[] input1;
 	private Integer[] input2;
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		input1 = new String[] {"A", "B", "C", "D", "E", "F"};

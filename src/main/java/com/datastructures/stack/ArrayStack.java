@@ -38,9 +38,12 @@ public class ArrayStack<E> {
 
 	private void reSize() {
 		if (isFull()) {
+			/*
 			final E[] temp = (E[]) new Object[stack.length * 2];
 			System.arraycopy(stack, 0, temp, 0, stack.length);
 			stack = temp;
+			*/
+			stack = Arrays.copyOf(stack, stack.length * 2);
 		}
 	}
 

@@ -66,13 +66,22 @@ public class BinarySearchTree<E extends Comparable> {
 			System.out.printf("%d ", node.data);
 		}
 	}
+	
+	public boolean isBST() {
+		return isBST(root);
+	}
+
+	private boolean isBST(Node<E> root2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	private static final class Node<E extends Comparable> {
 		private Node<E> left;
 		private Node<E> right;
 		private E data;
 
-		public Node(final E data) {
+		private Node(final E data) {
 			this.data = data;
 		}
 	}

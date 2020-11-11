@@ -38,9 +38,12 @@ public class ArrayQueue<E> {
 
 	private void reSize() {
 		if (isFull()) {
+			/*
 			final E[] temp = (E[]) new Object[queue.length * 2];
 			System.arraycopy(queue, 0, temp, 0, queue.length);
 			queue = temp;
+			*/
+			queue = Arrays.copyOf(queue, queue.length*2);
 		}
 	}
 
@@ -49,8 +52,9 @@ public class ArrayQueue<E> {
 			throw new IllegalStateException("Queue Underflow...");
 		}
 		final E element = queue[0];
-		System.arraycopy(queue, 1, queue, 0, queue.length - 1);
-		queue[index--] = null;
+		//System.arraycopy(queue, 1, queue, 0, queue.length - 1);
+		//queue[index--] = null;
+		queue = Arrays.copyOfRange(queue, 1, 1+index--);
 		return element;
 	}
 
